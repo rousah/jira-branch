@@ -10,12 +10,13 @@ e.g. `${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163` -> `feature/NPOST-23163-some-t
 
 ## Setup
 
-1. Enable the plugin in `~/.zshrc`:
+1. Install plugin in your oh-my-zsh plugin directory (default `~/oh-my-zsh/custom/plugins`)
+2. Enable the plugin in `~/.zshrc`:
    ```zsh
    plugins=(... jira-branch)
    ```
-2. Create an Atlassian API token: https://id.atlassian.com/manage-profile/security/api-tokens
-3. Export credentials (e.g. in `~/.zshrc` or a private env file):
+3. Create an Atlassian API token: https://id.atlassian.com/manage-profile/security/api-tokens
+4. Export credentials (e.g. in `~/.zshrc` or a private env file):
    ```zsh
    export JIRA_EMAIL="you@example.com"
    export JIRA_API_TOKEN="your-api-token"
