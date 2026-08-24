@@ -3,8 +3,9 @@
 # Usage:
 #   jira-branch ${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163
 #   jira-branch NPOST-23163
+#   jira-branch NPOST-23163 chore
 #
-# Produces a branch like: feature/NPOST-23163-some-ticket-summary
+# Produces a branch like: feat/NPOST-23163-some-ticket-summary
 # and checks it out (creating it if it doesn't already exist).
 #
 # Requires:
@@ -22,11 +23,8 @@ _jira_branch_type_prefix() {
   lower=$(echo "$issue_type" | tr '[:upper:]' '[:lower:]')
 
   case "$lower" in
-    bug) echo "bugfix" ;;
-    task|sub-task|subtask) echo "task" ;;
-    spike) echo "poc" ;;
-    story) echo "feature" ;;
-    clone-story) echo "feature" ;;
+    bug) echo "fix" ;;
+    story|clone-story|task|sub-task|subtask|spike) echo "feat" ;;
     *) echo "$lower" | tr -cs 'a-z0-9' '-' | sed 's/^-*//;s/-*$//' ;;
   esac
 }
@@ -43,7 +41,7 @@ jira-branch() {
   setopt local_options pipefail
 
   if [[ -z "$1" ]]; then
-    echo "Usage: jira-branch <jira-ticket-url-or-key>" >&2
+    echo "Usage: jira-branch <jira-ticket-url-or-key> [prefix]" >&2
     return 1
   fi
 
@@ -105,7 +103,15 @@ jira-branch() {
   fi
 
   local prefix slug branch_name
-  prefix=$(_jira_branch_type_prefix "$issue_type")
+  if [[ -n "$2" ]]; then
+    prefix=$(_jira_branch_slugify "$2")
+    if [[ -z "$prefix" ]]; then
+      echo "jira-branch: prefix must contain at least one letter or number" >&2
+      return 1
+    fi
+  else
+    prefix=$(_jira_branch_type_prefix "$issue_type")
+  fi
   slug=$(_jira_branch_slugify "$summary")
   branch_name="${prefix}/${ticket_key}-${slug}"
 

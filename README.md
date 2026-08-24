@@ -6,7 +6,7 @@ Create a git branch from a Jira ticket URL (or key), named:
 <type>/<TICKET-KEY>-<summary-slug>
 ```
 
-e.g. `${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163` -> `feature/NPOST-23163-some-ticket-summary`
+e.g. `${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163` -> `feat/NPOST-23163-some-ticket-summary`
 
 ## Setup
 
@@ -27,26 +27,29 @@ e.g. `${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163` -> `feature/NPOST-23163-some-t
 ```zsh
 jira-branch ${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163
 jira-branch NPOST-23163
+jira-branch NPOST-23163 chore
 ```
 or 
 ```zsh
 jb ${JIRA_BRANCH_BASE_URL}/browse/NPOST-23163
 jb NPOST-23163
+jb NPOST-23163 chore
 ```
 
 This fetches the ticket's issue type and summary, builds the branch name, and
-checks it out (creating it if needed).
+checks it out (creating it if needed). Pass an optional second argument to
+override the mapped prefix; the override is normalized to lowercase kebab-case.
 
 ## Type mapping
 
 | Jira issue type | Branch prefix |
 |---|---|
-| Bug | bugfix |
-| Story | feature |
-| Clone-story | feature |
-| Task / Sub-task | task |
-| Spike | poc |
-| other | lowercased issue type |
+| Bug | fix |
+| Story | feat |
+| Clone-story | feat |
+| Task / Sub-task | feat |
+| Spike | feat |
+| other | lowercased issue type with spaces and punctuation replaced by `-` |
 
 ## Optional
 
