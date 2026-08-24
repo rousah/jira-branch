@@ -41,12 +41,12 @@ checks it out (creating it if needed).
 
 | Jira issue type | Branch prefix |
 |---|---|
-| Bug | bugfix |
-| Story | feature |
-| Clone-story | feature |
-| Task / Sub-task | task |
-| Spike | poc |
-| other | lowercased issue type |
+| Bug | fix |
+| Story | feat |
+| Clone-story | feat |
+| Task / Sub-task | feat |
+| Spike | feat |
+| other | lowercased issue type with spaces and punctuation replaced by `-` |
 
 ## Optional
 

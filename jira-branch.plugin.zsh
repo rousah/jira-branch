@@ -22,11 +22,8 @@ _jira_branch_type_prefix() {
   lower=$(echo "$issue_type" | tr '[:upper:]' '[:lower:]')
 
   case "$lower" in
-    bug) echo "bugfix" ;;
-    task|sub-task|subtask) echo "task" ;;
-    spike) echo "poc" ;;
-    story) echo "feature" ;;
-    clone-story) echo "feature" ;;
+    bug) echo "fix" ;;
+    story|clone-story|task|sub-task|subtask|spike) echo "feat" ;;
     *) echo "$lower" | tr -cs 'a-z0-9' '-' | sed 's/^-*//;s/-*$//' ;;
   esac
 }
