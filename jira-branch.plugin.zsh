@@ -112,7 +112,7 @@ jira-branch() {
   else
     prefix=$(_jira_branch_type_prefix "$issue_type")
   fi
-  slug=$(_jira_branch_slugify "$summary")
+  slug=$(_jira_branch_slugify "$summary" | sed 's/-web$//')
   branch_name="${prefix}/${ticket_key}-${slug}"
 
   echo "Ticket:  ${ticket_key} (${issue_type})"
