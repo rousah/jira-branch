@@ -39,6 +39,7 @@ jb NPOST-23163 chore
 This fetches the ticket's issue type and summary, builds the branch name, and
 checks it out (creating it if needed). Pass an optional second argument to
 override the mapped prefix; the override is normalized to lowercase kebab-case.
+A trailing `-web` in the summary is omitted from the branch name.
 
 ## Type mapping
 
